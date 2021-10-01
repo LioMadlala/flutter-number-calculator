@@ -91,11 +91,16 @@ class _ThemeSwitchState extends State<ThemeSwitch> {
               elevation: 0,
               leading: InkWell(
                 onTap: () {
-                  setState(() {
-                    _light = !_light!;
-                    _getTheme();
-                    _saveTheme(_light);
-                  });
+                  if (_light != null) {
+                    setState(() {
+                      _saveTheme(_light);
+                      _light = !_light!;
+
+                      //saving darkmode info to the shared prefferences
+                    });
+                  } else {
+                    _light = true;
+                  }
                 },
                 child: _light!
                     ? const Icon(
